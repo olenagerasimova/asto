@@ -207,8 +207,8 @@ final class FileStorageTest {
             Logger.info(this, Arrays.toString(copy));
             MatcherAssert.assertThat(
                 "All empty dirs removed",
-                false,
-                new IsEqual<>(false)
+                copy.length == 0,
+                new IsEqual<>(true)
             );
         }
     }

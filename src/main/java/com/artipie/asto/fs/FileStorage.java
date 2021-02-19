@@ -309,12 +309,16 @@ public final class FileStorage implements Storage {
             if (key.isPresent() && !key.get().string().isEmpty()
                 && Files.isDirectory(this.path(key.get()))) {
                 Logger.info(this, "First If");
+                boolean again = false;
                 try (Stream<Path> files = Files.list(this.path(key.get()))) {
                     if (!files.findFirst().isPresent()) {
                         Logger.info(this, "Not present");
                         Files.delete(this.path(key.get()));
-                        this.deleteEmptyParts(key.get().parent());
+                        again = true;
                     }
+                }
+                if (again) {
+                    this.deleteEmptyParts(key.get().parent());
                 }
             }
         } catch (final IOException err) {
