@@ -36,6 +36,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -200,7 +201,9 @@ final class FileStorageTest {
             new IsEqual<>(true)
         );
         try (Stream<Path> files = Files.list(this.tmp)) {
-            files.forEach(item -> Logger.info(this, item.toString()));
+            final String[] copy =
+                files.map(Path::toString).collect(Collectors.toList()).toArray(new String[]{});
+            Logger.info(this, Arrays.toString(copy));
             MatcherAssert.assertThat(
                 "All empty dirs removed",
                 false,
