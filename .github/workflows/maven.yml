@@ -1,12 +1,7 @@
 ---
 name: Maven Build
-"on":
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
+"on": push
+
 jobs:
   maven-build:
     runs-on: ${{ matrix.os }}

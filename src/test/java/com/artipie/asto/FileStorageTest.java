@@ -200,7 +200,7 @@ final class FileStorageTest {
             new IsEqual<>(true)
         );
         try (Stream<Path> files = Files.list(this.tmp)) {
-            files.forEach(item -> Logger.debug(this, item.toString()));
+            files.forEach(item -> Logger.info(this, item.toString()));
             MatcherAssert.assertThat(
                 "All empty dirs removed",
                 false,
