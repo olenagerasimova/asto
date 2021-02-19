@@ -305,10 +305,13 @@ public final class FileStorage implements Storage {
      */
     private void deleteEmptyParts(final Optional<Key> key) {
         try {
+            Logger.info(this, key.toString());
             if (key.isPresent() && !key.get().string().isEmpty()
                 && Files.isDirectory(this.path(key.get()))) {
+                Logger.info(this, "First If");
                 try (Stream<Path> files = Files.list(this.path(key.get()))) {
                     if (!files.findFirst().isPresent()) {
+                        Logger.info(this, "Not present");
                         Files.delete(this.path(key.get()));
                         this.deleteEmptyParts(key.get().parent());
                     }
