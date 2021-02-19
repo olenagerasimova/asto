@@ -193,6 +193,7 @@ final class FileStorageTest {
     @Test
     void deletesFileAndEmptyDirs() throws IOException {
         final Key.From file = new Key.From("one/two/file.txt");
+        Logger.info(this, file.parent().toString());
         this.storage.save(file, Content.EMPTY).join();
         this.storage.delete(file).join();
         MatcherAssert.assertThat(
